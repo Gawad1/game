@@ -14,7 +14,7 @@ public class Circuis {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        System.out.print("jhgug");
+        System.out.print("jhgug77777");
         // TODO code application logic here
     }
     
