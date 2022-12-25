@@ -8,6 +8,6 @@ package circus;
  *
  * @author ADMIN
  */
-public class Circuis {
+public class Circus {
     
 }
