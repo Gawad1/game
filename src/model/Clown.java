@@ -8,9 +8,10 @@ package model;
  *
  * @author ADMIN
  */
-public class Clown extends ImageObject {
+public class Clown extends ImageObject   {
     
     static Clown clown=new Clown();
+
     
     private Clown(int posX, int posY, String path, int type) {
         super(posX, posY, path, type);

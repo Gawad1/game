@@ -13,9 +13,5 @@ public class Bomb extends ImageObject{
     public Bomb(int posX, int posY, String path, int type) {
         super(posX, posY, path, type);
     }
-    public Bomb()
-    {
-        super(0,0,"",0);
-    }
     
 }

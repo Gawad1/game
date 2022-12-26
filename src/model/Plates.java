@@ -13,9 +13,7 @@ public class Plates extends ImageObject {
     public Plates(int posX, int posY, String path, int type) {
         super(posX, posY, path, type);
     }
-        public Plates() {
-        super(0,0,"",0);
-    }
+       
     
     
     

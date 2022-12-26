@@ -8,6 +8,19 @@ package model;
  *
  * @author ADMIN
  */
-public class AddTime {
+public class AddTime extends ImageObject {
     
+       static AddTime addTime=new AddTime();
+    
+    private AddTime(int posX, int posY, String path, int type) {
+        super(posX, posY, path, type);
+    }
+        
+    private AddTime() {
+        super(0,0,"",0);
+    }
+     public static AddTime getInstance()
+    {
+        return addTime;
+    }
 }
