@@ -30,13 +30,13 @@ public class Circus implements World {
         width = screenWidth;
         height = screenHeight;
         // control objects (fighter)
-        Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.8), "/clown.png", 0);
+        Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
         control.add(clown);
         for (int i = 0; i < 10; i++) {
-            moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Plate" + (int) (1 + Math.random() * 3) + ".png", 1));
+            moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Plate" + (int) (1 + Math.random() * 4) + ".png", 1));
         }
         for (int i = 0; i < 10; i++) {
-            moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Bowl" + (int) (1 + Math.random() * 3) + ".png", 2));
+            moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Bowl" + (int) (1 + Math.random() * 4) + ".png", 2));
         }
     }
 
