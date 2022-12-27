@@ -32,6 +32,7 @@ public class Circus implements World {
         // control objects (fighter)
         Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
         control.add(clown);
+        constant.add(new ImageObject((int) (screenWidth), (int) (screenHeight), "/theme.png", 10));
         for (int i = 0; i < 10; i++) {
             moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Plate" + (int) (1 + Math.random() * 4) + ".png", 1));
         }
