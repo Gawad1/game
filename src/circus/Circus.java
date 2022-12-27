@@ -41,11 +41,11 @@ public class Circus implements World {
     }
 
     private boolean intersectLeft(GameObject clown, GameObject object) {
-        return (Math.abs((clown.getX() + 30) - (object.getX() + object.getWidth() / 6)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY())) == 0);
+        return (Math.abs((clown.getX() + 30) - (object.getX() + object.getWidth() / 10)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY())) == 0);
     }
 
     private boolean intersectRight(GameObject clown, GameObject object) {
-        return (Math.abs((clown.getX() + 150) - (object.getX() + object.getWidth() / 6)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY())) == 0);
+        return (Math.abs((clown.getX() + 150) - (object.getX() + object.getWidth() / 10)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY())) == 0);
     }
 
     @Override
@@ -54,13 +54,13 @@ public class Circus implements World {
         for (GameObject m : moving.toArray(new GameObject[moving.size()])) {
             if (intersectLeft(clown, m)) {
                 m.setX(clown.getX() + 30);
-                m.setY(clown.getY() + 20);
+                m.setY(clown.getY() + 15);
                 control.add(m);
                 moving.remove(m);
             }
             if (intersectRight(clown, m)) {
                 m.setX(clown.getX() + 150);
-                m.setY(clown.getY() + 20);
+                m.setY(clown.getY() + 15);
                 control.add(m);
                 moving.remove(m);
             }
