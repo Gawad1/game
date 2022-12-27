@@ -47,7 +47,7 @@ public class Circus implements World {
         for(GameObject m:moving ){
             m.setY(m.getY()+1);
             if(m.getY()==height){
-                m.setY(-5);
+                m.setY(-6);
                 m.setX((int)Math.random()*width);
             }
             
