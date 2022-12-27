@@ -41,6 +41,19 @@ public class Circus implements World {
     }
 
     @Override
+    public boolean refresh(){
+        GameObject clown=control.get(0);
+        for(GameObject m:moving ){
+            m.setY(m.getY()+1);
+            if(m.getY()==height){
+                m.setY(-5);
+                m.setX((int)Math.random()*width);
+            }
+            
+        }
+        return true;
+    }
+    @Override
     public List<GameObject> getConstantObjects() {
         return constant;
     }
@@ -63,11 +76,6 @@ public class Circus implements World {
     @Override
     public int getHeight() {
         return height;
-    }
-
-    @Override
-    public boolean refresh() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     @Override
