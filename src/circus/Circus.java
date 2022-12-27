@@ -18,7 +18,7 @@ import model.ImageObject;
 public class Circus implements World {
 
     private static int MAX_TIME = 1 * 60 * 1000;
-    int x=1;
+    int x = 1;
     private int score = 0;
     private long startTime = System.currentTimeMillis();
     private final int width;
@@ -42,14 +42,34 @@ public class Circus implements World {
         }
     }
 
+    private boolean intersectLeft(GameObject clown, GameObject object) {
+        return (Math.abs((clown.getX() + 30) - (object.getX() + object.getWidth() / 6)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY())) == 0);
+    }
+
+    private boolean intersectRight(GameObject clown, GameObject object) {
+        return (Math.abs((clown.getX() + 150) - (object.getX() + object.getWidth() / 6)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY())) == 0);
+    }
+
     @Override
     public boolean refresh() {
         GameObject clown = control.get(0);
         for (GameObject m : moving.toArray(new GameObject[moving.size()])) {
+            if (intersectLeft(clown, m)) {
+                m.setX(clown.getX() + 30);
+                m.setY(clown.getY() + 20);
+                control.add(m);
+                moving.remove(m);
+            }
+            if (intersectRight(clown, m)) {
+                m.setX(clown.getX() + 150);
+                m.setY(clown.getY() + 20);
+                control.add(m);
+                moving.remove(m);
+            }
             m.setY((m.getY() + 1));
             if (m.getY() == height) {
-                m.setY(-5);
-                // m.setX((int)Math.random()*width);
+                m.setY(0);
+                m.setX((int) (Math.random() * getWidth()));
             }
 
         }
