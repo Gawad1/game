@@ -18,7 +18,6 @@ import model.ImageObject;
 public class Circus implements World {
 
     private static int MAX_TIME = 1 * 60 * 1000;
-    int x = 1;
     private int score = 0;
     private long startTime = System.currentTimeMillis();
     private final int width;
@@ -30,7 +29,6 @@ public class Circus implements World {
     public Circus(int screenWidth, int screenHeight) {
         width = screenWidth;
         height = screenHeight;
-        // control objects (fighter)
         Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
         control.add(clown);
         constant.add(new ImageObject(0, 0, "/theme.png", 10));
