@@ -4,11 +4,84 @@
  */
 package circus;
 
+import eg.edu.alexu.csd.oop.game.GameObject;
+import eg.edu.alexu.csd.oop.game.World;
+import java.util.LinkedList;
+import java.util.List;
+import model.Clown;
+import model.ImageObject;
+
 /**
  *
  * @author ADMIN
  */
-public class Circus {
-  
-    
+public class Circus implements World {
+
+    private static int MAX_TIME = 1 * 60 * 1000;
+    private int score = 0;
+    private long startTime = System.currentTimeMillis();
+    private final int width;
+    private final int height;
+    private final List<GameObject> constant = new LinkedList<GameObject>();
+    private final List<GameObject> moving = new LinkedList<GameObject>();
+    private final List<GameObject> control = new LinkedList<GameObject>();
+
+    public Circus(int screenWidth, int screenHeight) {
+        width = screenWidth;
+        height = screenHeight;
+        // control objects (fighter)
+        Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.8), "/clown.png", 0);
+        control.add(clown);
+        for (int i = 0; i < 10; i++) {
+            moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Plate" + (int) (1 + Math.random() * 3) + ".png", 1));
+        }
+        for (int i = 0; i < 10; i++) {
+            moving.add(new ImageObject((int) (Math.random() * width), (int) (Math.random() * height / 2), "/Bowl" + (int) (1 + Math.random() * 3) + ".png", 2));
+        }
+    }
+
+    @Override
+    public List<GameObject> getConstantObjects() {
+        return constant;
+    }
+
+    @Override
+    public List<GameObject> getMovableObjects() {
+        return moving;
+    }
+
+    @Override
+    public List<GameObject> getControlableObjects() {
+        return control;
+    }
+
+    @Override
+    public int getWidth() {
+        return width;
+    }
+
+    @Override
+    public int getHeight() {
+        return height;
+    }
+
+    @Override
+    public boolean refresh() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String getStatus() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public int getSpeed() {
+        return 10;
+    }
+
+    @Override
+    public int getControlSpeed() {
+        return 20;
+    }
 }

@@ -10,19 +10,10 @@ package model;
  */
 public class Clown extends ImageObject   {
     
-    static Clown clown=new Clown();
-
     
-    private Clown(int posX, int posY, String path, int type) {
+    public Clown(int posX, int posY, String path, int type) {
         super(posX, posY, path, type);
     }
 
-    private Clown() {
-        super(0,0,"",0);
-    }
-    public static Clown getInstance()
-    {
-        return clown;
-    }
     
 }

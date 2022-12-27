@@ -14,7 +14,7 @@ public class ImageObject implements GameObject{
 	private int x;
 	private int y;
 	private boolean visible;
-	private int type;
+	int type;
 	
 	/*public ImageObject(int posX, int posY, String path){
 		this(posX, posY, path, 0);
