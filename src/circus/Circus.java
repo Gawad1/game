@@ -14,6 +14,7 @@ import Controller.States;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import static Controller.Factory.getInstanceof;
 
 /**
 
@@ -41,14 +42,14 @@ public class Circus extends States implements World {
         constant.add(new ImageObject(0, 0, "/theme.png", 10));
         for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
-            moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
+            moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
         }
         for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
-            moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
+            moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
         }
         for (int i = 0; i < 10; i++) {
-            moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
+            moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
         moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/ScoreMultiplier.png", 6));
         moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Clock.png", 7));
