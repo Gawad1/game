@@ -19,7 +19,7 @@ import static Controller.Factory.getInstanceof;
 /**
 
  */
-public class Circus extends States implements World {
+public class Circus  implements World {
 
     private static int MAX_TIME = 1 * 60 * 1000;
     private int score = 0;
@@ -28,6 +28,7 @@ public class Circus extends States implements World {
     private final int height;
     int totalleft = 0;
     int totalright = 0;
+    States states=new States();
     private final List<GameObject> constant = new LinkedList<GameObject>();
     private final List<GameObject> moving = new LinkedList<GameObject>();
     private final List<GameObject> control = new LinkedList<GameObject>();
@@ -193,11 +194,12 @@ public class Circus extends States implements World {
     public String getStatus() {
         long time = Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
         try {
-            String state = getStates(score,time);
+            String state = states.getStates(score, time);
+            return "Score=" + score + "   |   Time=" + time + "   |   State=" + state ;
         } catch (IOException ex) {
             Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return "Score=" + score + "   |   Time=" + time + "   |   State=" + state;
+        return null;
     }
 
     @Override
