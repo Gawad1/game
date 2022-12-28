@@ -10,14 +10,14 @@ package model;
  */
 public class Clown extends ImageObject {
 
-    static Clown clown= new Clown();
-    public Clown(int posX, int posY, String path, int type) {
-        super(posX, posY, path, type);
-    }
-    public Clown(){
-        super(0,0,"",0);
+    private static Clown clown=null;
+
+    private Clown(){
+        super(300,(int)(675*0.65),"/clown.png",0);
     }
     public static Clown getinstace(){
+        if (clown==null)
+           clown=new Clown();
         return clown;
     }
 

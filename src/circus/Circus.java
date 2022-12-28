@@ -15,6 +15,8 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static Controller.Factory.getInstanceof;
+import model.AddTime;
+import model.ScoreMultiplier;
 
 /**
 
@@ -38,8 +40,11 @@ public class Circus  implements World {
     public Circus(int screenWidth, int screenHeight) {
         width = screenWidth;
         height = screenHeight;
-        Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
-        control.add(clown);
+        //Clown.getinstace().setX(screenWidth / 3);
+        //Clown.getinstace().setY((screenHeight * 0.65));
+        //Clown.getinstace().setType(0);
+        //Clown clown =new  Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
+        control.add(Clown.getinstace());
         constant.add(new ImageObject(0, 0, "/theme.png", 10));
         for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
@@ -52,8 +57,8 @@ public class Circus  implements World {
         for (int i = 0; i < 10; i++) {
             moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
-        moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/ScoreMultiplier.png", 6));
-        moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Clock.png", 7));
+        moving.add(ScoreMultiplier.getInstance());
+        moving.add(AddTime.getInstance());
 
     }
 
