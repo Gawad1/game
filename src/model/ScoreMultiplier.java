@@ -13,7 +13,7 @@ public class ScoreMultiplier extends ImageObject {
     
         
     private ScoreMultiplier() {
-        super((int) (Math.random() * 300), -(int) (Math.random() * 675), "/ScoreMultiplier.png", 6);
+        super((int) (Math.random() * 900), -(int) (Math.random() * 675), "/ScoreMultiplier.png", 6);
     }
      public static ScoreMultiplier getInstance()
     {

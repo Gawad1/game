@@ -15,18 +15,15 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static Controller.Factory.getInstanceof;
-<<<<<<< HEAD
 import Controller.Iterator.Iterator;
 import Controller.Iterator.Repo;
-=======
 import model.AddTime;
 import model.ScoreMultiplier;
->>>>>>> 4ea7229004e48e239a9e23c295155886c3db3aa8
 
 /**
  *
  */
-public class Circus  implements World {
+public class Circus implements World {
 
     private static int MAX_TIME = 1 * 60 * 1000;
     private int score = 0;
@@ -35,36 +32,24 @@ public class Circus  implements World {
     private final int height;
     int totalleft = 0;
     int totalright = 0;
-<<<<<<< HEAD
     private final Iterator moving = new Repo().getIterator();
     private final Iterator control = new Repo().getIterator();
     private final Iterator leftLeg = new Repo().getIterator();
     private final Iterator RighttLeg = new Repo().getIterator();
     private final Iterator constant = new Repo().getIterator();
-=======
-    States states=new States();
-    private final List<GameObject> constant = new LinkedList<GameObject>();
-    private final List<GameObject> moving = new LinkedList<GameObject>();
-    private final List<GameObject> control = new LinkedList<GameObject>();
-    private final List<ImageObject> leftLeg = new LinkedList<ImageObject>();
-    private final List<ImageObject> RighttLeg = new LinkedList<ImageObject>();
->>>>>>> 4ea7229004e48e239a9e23c295155886c3db3aa8
+    States states = new States();
 
     public Circus(int screenWidth, int screenHeight) {
         width = screenWidth;
         height = screenHeight;
-<<<<<<< HEAD
-        Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
-        control.Add(clown);
-        constant.Add(new ImageObject(0, 0, "/theme.png", 10));
-=======
+
         //Clown.getinstace().setX(screenWidth / 3);
         //Clown.getinstace().setY((screenHeight * 0.65));
         //Clown.getinstace().setType(0);
         //Clown clown =new  Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
-        control.add(Clown.getinstace());
-        constant.add(new ImageObject(0, 0, "/theme.png", 10));
->>>>>>> 4ea7229004e48e239a9e23c295155886c3db3aa8
+        control.Add(Clown.getinstace());
+        constant.Add(new ImageObject(0, 0, "/theme.png", 10));
+
         for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
@@ -76,13 +61,8 @@ public class Circus  implements World {
         for (int i = 0; i < 10; i++) {
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
-<<<<<<< HEAD
-        moving.Add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/ScoreMultiplier.png", 6));
-        moving.Add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Clock.png", 7));
-=======
-        moving.add(ScoreMultiplier.getInstance());
-        moving.add(AddTime.getInstance());
->>>>>>> 4ea7229004e48e239a9e23c295155886c3db3aa8
+        moving.Add(ScoreMultiplier.getInstance());
+        moving.Add(AddTime.getInstance());
 
     }
 
@@ -193,7 +173,7 @@ public class Circus  implements World {
                     }
                 }
             }
-        } 
+        }
         return !timeout;
 
     }
@@ -225,18 +205,7 @@ public class Circus  implements World {
 
     @Override
     public String getStatus() {
-        long time = Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
-        try {
-<<<<<<< HEAD
-            String state = getStates(score, time);
-=======
-            String state = states.getStates(score, time);
-            return "Score=" + score + "   |   Time=" + time + "   |   State=" + state ;
->>>>>>> 4ea7229004e48e239a9e23c295155886c3db3aa8
-        } catch (IOException ex) {
-            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
+        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
     }
 
     @Override

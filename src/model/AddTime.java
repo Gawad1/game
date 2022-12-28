@@ -15,7 +15,7 @@ public class AddTime extends ImageObject {
     
         
     private AddTime() {
-        super((int)(Math.random() * 300), -(int) (Math.random() * 675), "/Clock.png", 7);
+        super((int)(Math.random() * 900), -(int) (Math.random() * 675), "/Clock.png", 7);
     }
      public static AddTime getInstance()
     {
