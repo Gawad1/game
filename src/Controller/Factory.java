@@ -48,8 +48,8 @@ public class Factory {
          return ScoreMultiplier.getInstance();
      }
      else if(type==7){
-         return ScoreMultiplier.getInstance();
+         return AddTime.getInstance();
      }
      else
          return null;
-    }}
+    }}  
