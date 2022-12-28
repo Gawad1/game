@@ -14,16 +14,16 @@ import java.io.IOException;
 public class States {
 
     public String state = "Progress";
-    int HS;
+    int HS=0;
     public String getStates(int score, long time) throws FileNotFoundException, IOException {
         if (time > 0) {
             return state;
         } 
         else 
         {
-            HS = 0;
-        }    
-        File file=new File("hs.txt");
+            
+            
+            File file=new File("/hs.txt");
              Scanner sc = new Scanner(file);
             HS = Integer.parseInt(sc.nextLine());
              if (score > HS) {
@@ -36,6 +36,9 @@ public class States {
           // BufferedWriter br = new BufferedWriter(fr);
             fr.write(HS);
             return state;
+        }    
+        
+             
         }
     }
 

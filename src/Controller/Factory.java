@@ -3,7 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
-
+import model.Clown;
 import model.AddTime;
 import model.Bomb;
 import model.Bowl;
@@ -18,7 +18,9 @@ import model.ScoreMultiplier;
 public class Factory {
      static public ImageObject getInstanceof(int x,int y, String path,int type)
     {
-     if (type ==1)
+     if (type==0)
+        return Clown.getinstace();
+     else if (type ==1)
      {
        if(path=="bowl1.png")
            return new Bowl(x,y,path,type);
@@ -44,11 +46,12 @@ public class Factory {
      else if(type==5){
          return new Bomb(x,y,path,type);
      }
-     /*else if(type==6){
-         return new ScoreMultiplier(x,y,path,type);
+     else if(type==6){
+         return ScoreMultiplier.getInstance();
      }
      else if(type==7){
-         return new AddTime(x,y,path,type);
-     }*/
+         return AddTime.getInstance();
+     }
+     else
          return null;
-    }}
+    }}  

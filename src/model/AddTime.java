@@ -10,17 +10,17 @@ package model;
  */
 public class AddTime extends ImageObject {
     
-       static AddTime addTime=new AddTime();
+       static AddTime addTime=null;
     
-    private AddTime(int posX, int posY, String path, int type) {
-        super(posX, posY, path, type);
-    }
+    
         
     private AddTime() {
-        super(0,0,"",0);
+        super((int)(Math.random() * 300), -(int) (Math.random() * 675), "/Clock.png", 7);
     }
      public static AddTime getInstance()
     {
+        if(addTime==null)
+            addTime=new AddTime();
         return addTime;
     }
 }
