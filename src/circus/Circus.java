@@ -15,9 +15,11 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import static Controller.Factory.getInstanceof;
+import Controller.Iterator.Iterator;
+import Controller.Iterator.Repo;
 
 /**
-
+ *
  */
 public class Circus extends States implements World {
 
@@ -28,31 +30,31 @@ public class Circus extends States implements World {
     private final int height;
     int totalleft = 0;
     int totalright = 0;
-    private final List<GameObject> constant = new LinkedList<GameObject>();
-    private final List<GameObject> moving = new LinkedList<GameObject>();
-    private final List<GameObject> control = new LinkedList<GameObject>();
-    private final List<ImageObject> leftLeg = new LinkedList<ImageObject>();
-    private final List<ImageObject> RighttLeg = new LinkedList<ImageObject>();
+    private final Iterator moving = new Repo().getIterator();
+    private final Iterator control = new Repo().getIterator();
+    private final Iterator leftLeg = new Repo().getIterator();
+    private final Iterator RighttLeg = new Repo().getIterator();
+    private final Iterator constant = new Repo().getIterator();
 
     public Circus(int screenWidth, int screenHeight) {
         width = screenWidth;
         height = screenHeight;
         Clown clown = new Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
-        control.add(clown);
-        constant.add(new ImageObject(0, 0, "/theme.png", 10));
+        control.Add(clown);
+        constant.Add(new ImageObject(0, 0, "/theme.png", 10));
         for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
-            moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
+            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
         }
         for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
-            moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
+            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
         }
         for (int i = 0; i < 10; i++) {
-            moving.add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
+            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
-        moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/ScoreMultiplier.png", 6));
-        moving.add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Clock.png", 7));
+        moving.Add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/ScoreMultiplier.png", 6));
+        moving.Add(new ImageObject((int) (Math.random() * width), -(int) (Math.random() * height), "/Clock.png", 7));
 
     }
 
@@ -68,25 +70,29 @@ public class Circus extends States implements World {
     public boolean refresh() {
         boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
         Clown clown = (Clown) control.get(0);
-        for (ImageObject m : moving.toArray(new ImageObject[moving.size()])) {
+        // for (ImageObject m = moving.get(0); moving.hasNext(); m = moving.next()) {
+        ImageObject m;
+        moving.pos();
+        while (moving.hasNext()) {
+            m = moving.next();
             switch (m.getType()) {
                 case 1,2,3,4 -> {
                     if (intersectLeft(clown, m)) {
                         totalleft = totalleft + m.getHeight();
-                        control.add(m);
-                        moving.remove(m);
-                        leftLeg.add(m);
+                        control.Add(m);
+                        moving.Remove(m);
+                        leftLeg.Add(m);
                         m.setX(clown.getX() + 30);
                         m.setY(clown.getY() + 15 - totalleft);
-                        int x = leftLeg.size();
+                        int x = leftLeg.List().size();
                         if (x >= 3 && leftLeg.get(x - 1).getType() == leftLeg.get(x - 2).getType() && leftLeg.get(x - 1).getType() == leftLeg.get(x - 3).getType()) {
                             for (int i = 1; i <= 3; i++) {
                                 leftLeg.get(x - i).setY(-(int) (Math.random() * getHeight()));
                                 leftLeg.get(x - i).setX((int) (Math.random() * getWidth()));
-                                moving.add(leftLeg.get(x - i));
-                                control.remove(leftLeg.get(x - i));
+                                moving.Add(leftLeg.get(x - i));
+                                control.Remove(leftLeg.get(x - i));
                                 totalleft = totalleft - leftLeg.get(x - i).getHeight();
-                                leftLeg.remove(leftLeg.get(x - i));
+                                leftLeg.Remove(leftLeg.get(x - i));
                             }
                             score = score + 10;
                         }
@@ -94,20 +100,20 @@ public class Circus extends States implements World {
 
                     if (intersectRight(clown, m)) {
                         totalright = totalright + m.getHeight();
-                        control.add(m);
-                        moving.remove(m);
-                        RighttLeg.add(m);
+                        control.Add(m);
+                        moving.Remove(m);
+                        RighttLeg.Add(m);
                         m.setX(clown.getX() + 150);
                         m.setY(clown.getY() + 15 - totalright);
-                        int x = RighttLeg.size();
+                        int x = RighttLeg.List().size();
                         if (x >= 3 && RighttLeg.get(x - 1).getType() == RighttLeg.get(x - 2).getType() && RighttLeg.get(x - 1).getType() == RighttLeg.get(x - 3).getType()) {
                             for (int i = 1; i <= 3; i++) {
                                 RighttLeg.get(x - i).setY(-(int) (Math.random() * getHeight()));
                                 RighttLeg.get(x - i).setX((int) (Math.random() * getWidth()));
-                                moving.add(RighttLeg.get(x - i));
-                                control.remove(RighttLeg.get(x - i));
+                                moving.Add(RighttLeg.get(x - i));
+                                control.Remove(RighttLeg.get(x - i));
                                 totalright = totalright - RighttLeg.get(x - i).getHeight();
-                                RighttLeg.remove(RighttLeg.get(x - i));
+                                RighttLeg.Remove(RighttLeg.get(x - i));
                             }
                             score = score + 10;
                         }
@@ -159,24 +165,24 @@ public class Circus extends States implements World {
                     }
                 }
             }
-        }
-
+        } 
         return !timeout;
+
     }
 
     @Override
     public List<GameObject> getConstantObjects() {
-        return constant;
+        return constant.List();
     }
 
     @Override
     public List<GameObject> getMovableObjects() {
-        return moving;
+        return moving.List();
     }
 
     @Override
     public List<GameObject> getControlableObjects() {
-        return control;
+        return control.List();
     }
 
     @Override
@@ -193,7 +199,7 @@ public class Circus extends States implements World {
     public String getStatus() {
         long time = Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
         try {
-            String state = getStates(score,time);
+            String state = getStates(score, time);
         } catch (IOException ex) {
             Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
         }

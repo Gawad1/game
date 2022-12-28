@@ -4,6 +4,8 @@
  */
 package Controller.Iterator;
 import eg.edu.alexu.csd.oop.game.GameObject;
+import java.util.List;
+import model.ImageObject;
 
 /**
  *
@@ -11,6 +13,11 @@ import eg.edu.alexu.csd.oop.game.GameObject;
  */
 public interface Iterator {
     public boolean hasNext( );
-    public GameObject next( );
-
+    public ImageObject next( );
+    public void Add(ImageObject o);
+    public void Remove(ImageObject i);
+    public List List();
+    public ImageObject get(int i);
+    public void pos();
+    
 }
