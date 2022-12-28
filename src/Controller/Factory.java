@@ -44,11 +44,12 @@ public class Factory {
      else if(type==5){
          return new Bomb(x,y,path,type);
      }
-     /*else if(type==6){
-         return new ScoreMultiplier(x,y,path,type);
+     else if(type==6){
+         return ScoreMultiplier.getInstance();
      }
      else if(type==7){
-         return new AddTime(x,y,path,type);
-     }*/
+         return ScoreMultiplier.getInstance();
+     }
+     else
          return null;
     }}
