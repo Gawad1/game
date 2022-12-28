@@ -13,26 +13,36 @@ import java.io.IOException;
 
 public class States {
 
-    String state = "Progress";
-
-    public String getStates(int score, int time) throws FileNotFoundException, IOException {
+    public String state = "Progress";
+    int HS;
+    public String getStates(int score, long time) throws FileNotFoundException, IOException {
         if (time > 0) {
             return state;
-        } else {
-            int HS;
-            File file = new File("/hs.txt");
-            Scanner sc = new Scanner(file);
+        } 
+        else 
+        {
+            HS = 0;
+        }    
+        File file=new File("hs.txt");
+             Scanner sc = new Scanner(file);
             HS = Integer.parseInt(sc.nextLine());
-            if (score > HS) {
+             if (score > HS) {
                 HS = score;
                 state = "HighScore";
             } else {
                 state = "GameOver";
             }
-            FileWriter fr = new FileWriter("hello.txt");
-            BufferedWriter br = new BufferedWriter(fr);
-            br.write(HS);
+             FileWriter fr = new FileWriter("hs.txt");
+          // BufferedWriter br = new BufferedWriter(fr);
+            fr.write(HS);
             return state;
         }
     }
-}
+
+            // System.out.println("Hello World!");
+  
+    
+           
+        
+    
+

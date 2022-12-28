@@ -10,12 +10,15 @@ import java.util.LinkedList;
 import java.util.List;
 import model.Clown;
 import model.ImageObject;
+import Controller.States;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
- *
- * @author ADMIN
+
  */
-public class Circus implements World {
+public class Circus extends States implements World {
 
     private static int MAX_TIME = 1 * 60 * 1000;
     private int score = 0;
@@ -187,7 +190,13 @@ public class Circus implements World {
 
     @Override
     public String getStatus() {
-        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
+        long time = Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
+        try {
+            String state = getStates(score,time);
+        } catch (IOException ex) {
+            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return "Score=" + score + "   |   Time=" + time + "   |   State=" + state;
     }
 
     @Override
