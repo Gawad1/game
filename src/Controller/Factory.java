@@ -3,6 +3,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Controller;
+
 import model.Clown;
 import model.AddTime;
 import model.Bomb;
@@ -16,42 +17,52 @@ import model.ScoreMultiplier;
  * @author ADMIN
  */
 public class Factory {
-     static public ImageObject getInstanceof(int x,int y, String path,int type)
-    {
-     if (type==0)
-        return Clown.getinstace();
-     else if (type ==1)
-     {
-       if(path=="bowl1.png")
-           return new Bowl(x,y,path,type);
-       return new Plates(x,y,path,type);
-     }
-     else if (type==2)
-     {
-         if(path=="bowl2.png")
-           return new Bowl(x,y,path,type);
-       return new Plates(x,y,path,type);
-     }
-     else if (type ==3)
-     {
-         if(path=="bowl3.png")
-           return new Bowl(x,y,path,type);
-       return new Plates(x,y,path,type);
-     }
-     else if(type==4){
-         if(path=="bowl4.png")
-           return new Bowl(x,y,path,type);
-       return new Plates(x,y,path,type);
-     }
-     else if(type==5){
-         return new Bomb(x,y,path,type);
-     }
-     else if(type==6){
-         return ScoreMultiplier.getInstance();
-     }
-     else if(type==7){
-         return AddTime.getInstance();
-     }
-     else
-         return null;
-    }}  
+
+    static public ImageObject getInstanceof(int x, int y, String path, int type) {
+        switch (type) {
+            case 0:
+                return Clown.getinstace();
+            case 1:
+                if ("bowl1.png".equals(path)) {
+                    return new Bowl(x, y, path, type);
+                }
+                return new Plates(x, y, path, type);
+            case 2:
+                if ("bowl2.png".equals(path)) {
+                    return new Bowl(x, y, path, type);
+                }
+                return new Plates(x, y, path, type);
+            case 3:
+                if ("bowl3.png".equals(path)) {
+                    return new Bowl(x, y, path, type);
+                }
+                return new Plates(x, y, path, type);
+            case 4:
+                if ("bowl4.png".equals(path)) {
+                    return new Bowl(x, y, path, type);
+                }
+                return new Plates(x, y, path, type);
+            case 5:
+                return new Bomb(x, y, path, type);
+            case 6:
+                return ScoreMultiplier.getInstance();
+            case 7:
+                return AddTime.getInstance();
+            default:
+                return null;
+        }
+    }
+
+    static public ImageObject getInstanceof(int type) {
+        switch (type) {
+            case 0:
+                return Clown.getinstace();
+            case 6:
+                return ScoreMultiplier.getInstance();
+            case 7:
+                return AddTime.getInstance();
+            default:
+                return null;
+        }
+    }
+}

@@ -17,6 +17,8 @@ import java.util.logging.Logger;
 import static Controller.Factory.getInstanceof;
 import Controller.Iterator.Iterator;
 import Controller.Iterator.Repo;
+import Controller.Strategy.Mode;
+import Controller.Strategy.GameMode;
 import model.AddTime;
 import model.ScoreMultiplier;
 
@@ -32,14 +34,15 @@ public class Circus implements World {
     private final int height;
     int totalleft = 0;
     int totalright = 0;
-    private final Iterator moving = new Repo().getIterator();
-    private final Iterator control = new Repo().getIterator();
-    private final Iterator leftLeg = new Repo().getIterator();
-    private final Iterator RighttLeg = new Repo().getIterator();
-    private final Iterator constant = new Repo().getIterator();
+    private Iterator moving;
+    private Iterator control;
+    private Iterator leftLeg = new Repo().getIterator();
+    private Iterator RighttLeg = new Repo().getIterator();
+    private Iterator constant;
     States states = new States();
+    Mode mode;
 
-    public Circus(int screenWidth, int screenHeight) {
+    public Circus(int screenWidth, int screenHeight, String GameMode) {
         width = screenWidth;
         height = screenHeight;
 
@@ -47,10 +50,14 @@ public class Circus implements World {
         //Clown.getinstace().setY((screenHeight * 0.65));
         //Clown.getinstace().setType(0);
         //Clown clown =new  Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
-        control.Add(Clown.getinstace());
-        constant.Add(new ImageObject(0, 0, "/theme.png", 10));
-
-        for (int i = 0; i < 10; i++) {
+        //control.Add(Clown.getinstace());
+        //constant.Add(new ImageObject(0, 0, "/theme.png", 10));
+        GameMode gameMode = new GameMode(screenWidth, screenHeight, GameMode);
+        mode = gameMode.getMode();
+        moving = mode.getMoving();
+        control = mode.getControl();
+        constant = mode.getConstant();
+        /*for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
         }
@@ -63,7 +70,7 @@ public class Circus implements World {
         }
         moving.Add(ScoreMultiplier.getInstance());
         moving.Add(AddTime.getInstance());
-
+         */
     }
 
     private boolean intersectLeft(GameObject clown, GameObject object) {
@@ -210,11 +217,11 @@ public class Circus implements World {
 
     @Override
     public int getSpeed() {
-        return 10;
+        return mode.getGamespeed();
     }
 
     @Override
     public int getControlSpeed() {
-        return 20;
+        return mode.getControlSpeed();
     }
 }
