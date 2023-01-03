@@ -40,9 +40,11 @@ public class Circus implements World {
     private Iterator RighttLeg = new Repo().getIterator();
     private Iterator constant;
     States states = new States();
-    Mode mode;
+    Mode mode ;
+    int speed;
 
     public Circus(int screenWidth, int screenHeight, String GameMode) {
+        
         width = screenWidth;
         height = screenHeight;
 
@@ -54,6 +56,14 @@ public class Circus implements World {
         //constant.Add(new ImageObject(0, 0, "/theme.png", 10));
         GameMode gameMode = new GameMode(screenWidth, screenHeight, GameMode);
         mode = gameMode.getMode();
+        speed=mode.getGamespeed();
+        System.out.println("dd");
+        System.out.println(gameMode.getMode().getGamespeed());
+        
+        
+        
+        
+        System.out.println(gameMode.getMode().getGamespeed());
         moving = mode.getMoving();
         control = mode.getControl();
         constant = mode.getConstant();
@@ -217,11 +227,16 @@ public class Circus implements World {
 
     @Override
     public int getSpeed() {
+        System.out.println(mode.getGamespeed());
+    
+        
+      
         return mode.getGamespeed();
     }
 
     @Override
     public int getControlSpeed() {
-        return mode.getControlSpeed();
+       // System.out.println(mode.getControlSpeed());
+        return 20;
     }
 }

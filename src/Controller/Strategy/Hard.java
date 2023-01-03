@@ -28,12 +28,13 @@ public class Hard implements Mode {
 
     @Override
     public int getGamespeed() {
-        return 150;
+      // System.out.println(getMode().getGamespeed());
+        return 10;
     }
 
     @Override
     public int getControlSpeed() {
-        return 150;
+        return 20;
     }
 
     @Override
@@ -52,7 +53,7 @@ public class Hard implements Mode {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
         }
-        for (int i = 0; i < 17; i++) {
+        for (int i = 0; i < 10; i++) {
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
         moving.Add(getInstanceof(6));

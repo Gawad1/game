@@ -28,7 +28,7 @@ public class Normal implements Mode {
 
     @Override
     public int getGamespeed() {
-        return 20;
+        return 15;
     }
 
     @Override
@@ -44,15 +44,15 @@ public class Normal implements Mode {
 
     @Override
     public Iterator getMoving() {
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 12; i++) {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 12; i++) {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
         }
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < 7; i++) {
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
         moving.Add(getInstanceof(6));

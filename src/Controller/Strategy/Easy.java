@@ -29,31 +29,27 @@ public class Easy implements Mode {
 
     @Override
     public int getGamespeed() {
-        return 30;
+        return 20;
     }
 
     @Override
     public int getControlSpeed() {
-        return 30;
+        return 20;
     }
 
-    @Override
-    public Iterator getConstant() {
-        constant.Add(new ImageObject(0, 0, "/theme.png", 10));
-        return constant;
-    }
+
 
     @Override
     public Iterator getMoving() {
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
         }
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 10; i++) {
             int x = (int) (1 + Math.random() * 4);
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
         }
-        for (int i = 0; i < 7; i++) {
+        for (int i = 0; i < 5; i++) {
             moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
         }
         moving.Add(getInstanceof(6));
@@ -65,6 +61,11 @@ public class Easy implements Mode {
     public Iterator getControl() {
         control.Add(getInstanceof(0));
         return control;
+    }
+
+    @Override
+    public Iterator getConstant() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

@@ -17,8 +17,20 @@ public class GameMode {
             mode = new Easy(width, height);
         } else if (gameMode.equals("normal")) {
             mode = new Normal(width, height);
-        } else if (gameMode.equals("hard")) {
+        } else // (gameMode.equals("hard")) {
+            
+        {
+           // System.out.println("hard game is created");
             mode = new Hard(width, height);
+           
+ System.out.println(getMode().getGamespeed());
+
+
+            
+            
+                  
+            
+           // System.out.println(mode.getGamespeed());
         }
     }
 
