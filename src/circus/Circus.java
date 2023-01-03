@@ -237,6 +237,6 @@ public class Circus implements World {
     @Override
     public int getControlSpeed() {
        // System.out.println(mode.getControlSpeed());
-        return 20;
+        return mode.getControlSpeed();
     }
 }
