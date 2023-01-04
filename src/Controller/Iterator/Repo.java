@@ -31,6 +31,7 @@ public class Repo implements Container {
             if (position < stack.size()) {
                 return true;
             }
+            position=0;
             return false;
         }
 
@@ -60,11 +61,6 @@ public class Repo implements Container {
         @Override
         public ImageObject get(int i) {
             return stack.get(i);
-        }
-
-        @Override
-        public void pos() {
-            position = 0;
         }
 
     }

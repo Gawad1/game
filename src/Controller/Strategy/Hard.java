@@ -15,20 +15,15 @@ import model.ImageObject;
  */
 public class Hard implements Mode {
 
-    int width;
-    int height;
     private final Iterator moving = new Repo().getIterator();
     private final Iterator control = new Repo().getIterator();
     private final Iterator constant = new Repo().getIterator();
 
-    public Hard(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Hard() {
     }
 
     @Override
     public int getGamespeed() {
-      // System.out.println(getMode().getGamespeed());
         return 10;
     }
 
@@ -46,24 +41,23 @@ public class Hard implements Mode {
     @Override
     public Iterator getMoving() {
         for (int i = 0; i < 17; i++) {
-            int x = (int) (1 + Math.random() * 4);
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
+            moving.Add(getInstanceof("plate"));
         }
         for (int i = 0; i < 17; i++) {
-            int x = (int) (1 + Math.random() * 4);
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
+            moving.Add(getInstanceof("bowl"));
         }
         for (int i = 0; i < 10; i++) {
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
+            moving.Add(getInstanceof("bomb"));
         }
-        moving.Add(getInstanceof(6));
-        moving.Add(getInstanceof(7));
+        moving.Add(getInstanceof("addTime"));
+        moving.Add(getInstanceof("scoreMultiplier"));
+
         return moving;
     }
 
     @Override
     public Iterator getControl() {
-        control.Add(getInstanceof(0));
+        control.Add(getInstanceof("clown"));
         return control;
     }
 

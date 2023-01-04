@@ -15,23 +15,11 @@ String gameMode;
     public GameMode(int width, int height, String gameMode) {
         this.gameMode=gameMode;
         if (gameMode.equals("easy")) {
-            mode = new Easy(width, height);
+            mode = new Easy();
         } else if (gameMode.equals("normal")) {
-            mode = new Normal(width, height);
-        } else // (gameMode.equals("hard")) {
-            
-        {
-           // System.out.println("hard game is created");
-            mode = new Hard(width, height);
-           
- System.out.println(getMode().getGamespeed());
-
-
-            
-            
-                  
-            
-           // System.out.println(mode.getGamespeed());
+            mode = new Normal();
+        } else {
+            mode = new Hard();
         }
     }
 

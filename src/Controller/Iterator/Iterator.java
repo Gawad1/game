@@ -18,6 +18,5 @@ public interface Iterator {
     public void Remove(ImageObject i);
     public List List();
     public ImageObject get(int i);
-    public void pos();
     
 }

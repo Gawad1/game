@@ -20,30 +20,14 @@ import java.util.logging.Logger;
 public class Main {
 
     public static void main(String[] args) {
-        States states = new States();
-        int score;
-        Circus circus=new circus.Circus(900, 675,"normal");
-       // final GameController gameController = GameEngine.start("Circus Game", new circus.Circus(900, 675, "hard"), Color.YELLOW);
-        
+
+        Circus circus=new circus.Circus(900, 675,"normal");        
         GameController gameController = new GameController(() -> circus);
-        
         gameController.start();
-       /* score=circus.Score();
-        try {
-            System.out.println(states.getStates(score, 0));
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        try {
-           if(states.getStates(score, 0).equals("HighScore"))
-           {
-               System.out.println("entered high score");
-               states.updateScore(score);
-           }
-        } catch (IOException ex) {
-            Logger.getLogger(Main.class.getName()).log(Level.SEVERE, null, ex);
-        }*/
+        
+
        
+
         
 
     }
