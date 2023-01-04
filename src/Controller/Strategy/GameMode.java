@@ -11,8 +11,9 @@ package Controller.Strategy;
 public class GameMode {
 
     Mode mode;
-
+String gameMode;
     public GameMode(int width, int height, String gameMode) {
+        this.gameMode=gameMode;
         if (gameMode.equals("easy")) {
             mode = new Easy(width, height);
         } else if (gameMode.equals("normal")) {
@@ -32,6 +33,10 @@ public class GameMode {
             
            // System.out.println(mode.getGamespeed());
         }
+    }
+
+    public String getGameMode() {
+        return gameMode;
     }
 
     public Mode getMode() {

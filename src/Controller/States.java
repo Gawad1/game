@@ -14,38 +14,79 @@ import java.io.IOException;
 public class States {
 
     public String state = "Progress";
-    int HS=0;
-    public String getStates(int score, long time) throws FileNotFoundException, IOException {
+    int HS[] = {0, 0, 0};
+
+
+
+    public String getStates(int score, long time, String GameMode) throws FileNotFoundException, IOException {
         if (time > 0) {
             return state;
-        } 
-        else 
-        {
-            
-            
-            File file=new File("/hs.txt");
-             Scanner sc = new Scanner(file);
-            HS = Integer.parseInt(sc.nextLine());
-             if (score > HS) {
-                HS = score;
-                state = "HighScore";
-            } else {
-                state = "GameOver";
+
+        } else {
+
+            int i = 0;
+            File file = new File("hs.txt");
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                HS[i] = Integer.parseInt(sc.nextLine());
+                System.out.print(HS[i]);
+                i++;
             }
-             FileWriter fr = new FileWriter("hs.txt");
-          // BufferedWriter br = new BufferedWriter(fr);
-            fr.write(HS);
+            if (GameMode.equals("easy")) {
+                if (score > HS[0]) {
+                    
+                    HS[0] = score;
+                    state = "HighScore";
+                } else {
+                    state = "GameOver";
+                }
+            } else if (GameMode.equals("normal")) {
+                if (score > HS[1]) {
+                  
+                    HS[1] = score;
+                    state = "HighScore";
+                } else {
+                    state = "GameOver";
+                }
+            } else {
+                if (score > HS[2]) {
+                    
+                    HS[2] = score;
+                    state = "HighScore";
+                } else {
+                    state = "GameOver";
+                }
+            }
             return state;
-        }    
-        
-             
+
         }
+
     }
 
-            // System.out.println("Hello World!");
-  
-    
-           
-        
-    
+    public void updateScore() throws IOException {
+        try {
+            try ( FileWriter f = new FileWriter("hs.txt")) {
+
+                for (int i = 0; i < 3; i++) {
+
+                    f.write(HS[i] + "\n");
+                }
+
+            }
+
+        } catch (IOException e) {
+            System.out.println("An error has occured");
+            e.printStackTrace();
+        }
+        /*FileWriter fr = new FileWriter("hs.txt");
+          // BufferedWriter br = new BufferedWriter(fr);
+         System.out.println("i will add");
+            fr.write("sf"+"/n");
+            fr.write("sss");*/
+
+    }
+
+}
+
+// System.out.println("Hello World!");
 

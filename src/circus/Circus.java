@@ -19,6 +19,8 @@ import Controller.Iterator.Iterator;
 import Controller.Iterator.Repo;
 import Controller.Strategy.Mode;
 import Controller.Strategy.GameMode;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.AddTime;
 import model.ScoreMultiplier;
 
@@ -41,7 +43,10 @@ public class Circus implements World {
     private Iterator constant;
     States states = new States();
     Mode mode ;
+    JFrame f; 
+      
     int speed;
+    GameMode gameMode;
 
     public Circus(int screenWidth, int screenHeight, String GameMode) {
         
@@ -54,7 +59,7 @@ public class Circus implements World {
         //Clown clown =new  Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
         //control.Add(Clown.getinstace());
         //constant.Add(new ImageObject(0, 0, "/theme.png", 10));
-        GameMode gameMode = new GameMode(screenWidth, screenHeight, GameMode);
+         gameMode = new GameMode(screenWidth, screenHeight, GameMode);
         mode = gameMode.getMode();
         speed=mode.getGamespeed();
         System.out.println("dd");
@@ -191,10 +196,45 @@ public class Circus implements World {
                 }
             }
         }
+        updateScore(score, Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000));
         return !timeout;
 
     }
-
+    private void  updateScore(int score,long time)
+    {
+        try {
+            if (states.getStates(score, time, gameMode.getGameMode()).equals("HighScore"))
+            {
+                f=new JFrame(); 
+                System.out.println("HighScore");
+                states.updateScore();
+                JOptionPane.showMessageDialog(f,"New High Score!!!!"); 
+            }
+            else if (states.getStates(score, time,gameMode.getGameMode()).equals("GameOver"))
+            {
+                System.out.println("GameOver");
+            }
+            else 
+            {
+                System.out.println("progress");
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    private String getstate()
+    {
+        try {
+            return states.getStates(score, Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000),gameMode.getGameMode());
+        } catch (IOException ex) {
+            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
+    }
+    public int Score()
+    {
+        return this.score;
+    }
     @Override
     public List<GameObject> getConstantObjects() {
         return constant.List();
@@ -222,7 +262,9 @@ public class Circus implements World {
 
     @Override
     public String getStatus() {
-        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000);
+        
+            return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000)+"  |    " + "Status: "+this.getstate();
+    
     }
 
     @Override
