@@ -8,7 +8,13 @@ import Controller.Iterator.Iterator;
 import Controller.Iterator.Repo;
 import Controller.Strategy.GameMode;
 import Controller.Strategy.Mode;
+import circus.Circus;
 import eg.edu.alexu.csd.oop.game.GameObject;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import model.ImageObject;
 
 /**
@@ -31,12 +37,17 @@ public class MainController {
     private int controlSpeed = 20;
     private long startTime;
     Mode mode;
+    JFrame f;
+    String gameMode;
+    States states = new States();
+    private static int MAX_TIME = 1 * 60 * 1000;
 
     public MainController(int screenWidth, int screenHeight, String GameMode, long startTime) {
 
         width = screenWidth;
         height = screenHeight;
         this.startTime = startTime;
+        this.gameMode=GameMode;
         GameMode gameMode = new GameMode(screenWidth, screenHeight, GameMode);
         mode = gameMode.getMode();
         speed = mode.getGamespeed();
@@ -162,6 +173,31 @@ public class MainController {
             }
         }
 
+    }
+        public void updateScore(int score, long time) {
+        f = new JFrame();
+        try {
+            if (states.getStates(score, time, gameMode).equals("HighScore")) {
+                
+                
+                states.updateScore();
+                JOptionPane.showMessageDialog(f, "New High Score!!!!");
+            } else if (states.getStates(score, time, gameMode).equals("GameOver")) {
+                 
+            }
+        } catch (IOException ex) {
+            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public String getstate() {
+        try {
+            return states.getStates(score, Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000), gameMode);
+        } 
+        catch (IOException ex) {
+            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 
     public long getStartTime() {

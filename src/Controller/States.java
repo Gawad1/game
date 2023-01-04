@@ -29,7 +29,7 @@ public class States {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 HS[i] = Integer.parseInt(sc.nextLine());
-                System.out.print(HS[i]);
+               
                 i++;
             }
             if (GameMode.equals("easy")) {
@@ -78,11 +78,7 @@ public class States {
             System.out.println("An error has occured");
             e.printStackTrace();
         }
-        /*FileWriter fr = new FileWriter("hs.txt");
-          // BufferedWriter br = new BufferedWriter(fr);
-         System.out.println("i will add");
-            fr.write("sf"+"/n");
-            fr.write("sss");*/
+      
 
     }
 

@@ -58,7 +58,7 @@ public class Circus implements World {
     public boolean refresh() {
         boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
 
-        updateScore(score, Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000));
+        mainController.updateScore(score, Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000));
 
         mainController.doRefresh();
         moving = mainController.getMoving();
@@ -70,31 +70,7 @@ public class Circus implements World {
 
     }
 
-    private void updateScore(int score, long time) {
-        try {
-            if (states.getStates(score, time, gameMode).equals("HighScore")) {
-                f = new JFrame();
-                System.out.println("HighScore");
-                states.updateScore();
-                JOptionPane.showMessageDialog(f, "New High Score!!!!");
-            } else if (states.getStates(score, time, gameMode).equals("GameOver")) {
-                System.out.println("GameOver");
-            } else {
-                System.out.println("progress");
-            }
-        } catch (IOException ex) {
-            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
-    private String getstate() {
-        try {
-            return states.getStates(score, Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000), gameMode);
-        } catch (IOException ex) {
-            Logger.getLogger(Circus.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return null;
-    }
 
     public int Score() {
         return this.score;
@@ -128,7 +104,7 @@ public class Circus implements World {
     @Override
     public String getStatus() {
 
-        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000) + "  |    " + "Status: " + this.getstate();
+        return "Score=" + score + "   |   Time=" + Math.max(0, (MAX_TIME - (System.currentTimeMillis() - startTime)) / 1000) + "  |    " + "Status: " + mainController.getstate();
 
     }
 

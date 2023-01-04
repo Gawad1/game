@@ -48,6 +48,7 @@ public final class GameController {
 //                gameController.changeWorld(new StarWar(800, 600));
                   gameFrame.dispose();
                   start();
+                 
             }
         });
         pauseMenuItem.addActionListener(new ActionListener() {
@@ -68,7 +69,7 @@ public final class GameController {
     public void start() {
         JMenuBar menuBar = createMenuBar();
         World game = gameSupplier.get();
-        this.gameController = GameEngine.start("StarWar Game", game, menuBar, Color.BLACK);
+        this.gameController = GameEngine.start("Circus", game, menuBar, Color.BLACK);
         this.gameFrame = (JFrame) menuBar.getParent().getParent().getParent();
         
         this.gameFrame.addWindowListener(new java.awt.event.WindowAdapter() {
