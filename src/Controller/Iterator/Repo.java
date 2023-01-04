@@ -63,11 +63,6 @@ public class Repo implements Container {
             return stack.get(i);
         }
 
-        @Override
-        public void pos() {
-            position = 0;
-        }
-
     }
 
 }
