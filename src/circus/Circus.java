@@ -40,11 +40,11 @@ public class Circus implements World {
     private Iterator RighttLeg = new Repo().getIterator();
     private Iterator constant;
     States states = new States();
-    Mode mode ;
+    Mode mode;
     int speed;
 
     public Circus(int screenWidth, int screenHeight, String GameMode) {
-        
+
         width = screenWidth;
         height = screenHeight;
 
@@ -56,13 +56,10 @@ public class Circus implements World {
         //constant.Add(new ImageObject(0, 0, "/theme.png", 10));
         GameMode gameMode = new GameMode(screenWidth, screenHeight, GameMode);
         mode = gameMode.getMode();
-        speed=mode.getGamespeed();
+        speed = mode.getGamespeed();
         System.out.println("dd");
         System.out.println(gameMode.getMode().getGamespeed());
-        
-        
-        
-        
+
         System.out.println(gameMode.getMode().getGamespeed());
         moving = mode.getMoving();
         control = mode.getControl();
@@ -94,10 +91,8 @@ public class Circus implements World {
     @Override
     public boolean refresh() {
         boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
-        Clown clown = (Clown) control.get(0);
-        // for (ImageObject m = moving.get(0); moving.hasNext(); m = moving.next()) {
+        ImageObject clown = control.get(0);
         ImageObject m;
-        moving.pos();
         while (moving.hasNext()) {
             m = moving.next();
             switch (m.getType()) {
@@ -109,11 +104,13 @@ public class Circus implements World {
                         leftLeg.Add(m);
                         m.setX(clown.getX() + 30);
                         m.setY(clown.getY() + 15 - totalleft);
+                        m.setKey(1);
                         int x = leftLeg.List().size();
                         if (x >= 3 && leftLeg.get(x - 1).getType() == leftLeg.get(x - 2).getType() && leftLeg.get(x - 1).getType() == leftLeg.get(x - 3).getType()) {
                             for (int i = 1; i <= 3; i++) {
                                 leftLeg.get(x - i).setY(-(int) (Math.random() * getHeight()));
                                 leftLeg.get(x - i).setX((int) (Math.random() * getWidth()));
+                                leftLeg.get(x - i).setKey(0);
                                 moving.Add(leftLeg.get(x - i));
                                 control.Remove(leftLeg.get(x - i));
                                 totalleft = totalleft - leftLeg.get(x - i).getHeight();
@@ -130,11 +127,13 @@ public class Circus implements World {
                         RighttLeg.Add(m);
                         m.setX(clown.getX() + 150);
                         m.setY(clown.getY() + 15 - totalright);
+                        m.setKey(1);
                         int x = RighttLeg.List().size();
                         if (x >= 3 && RighttLeg.get(x - 1).getType() == RighttLeg.get(x - 2).getType() && RighttLeg.get(x - 1).getType() == RighttLeg.get(x - 3).getType()) {
                             for (int i = 1; i <= 3; i++) {
                                 RighttLeg.get(x - i).setY(-(int) (Math.random() * getHeight()));
                                 RighttLeg.get(x - i).setX((int) (Math.random() * getWidth()));
+                                RighttLeg.get(x - i).setKey(0);
                                 moving.Add(RighttLeg.get(x - i));
                                 control.Remove(RighttLeg.get(x - i));
                                 totalright = totalright - RighttLeg.get(x - i).getHeight();
@@ -191,6 +190,14 @@ public class Circus implements World {
                 }
             }
         }
+        while (leftLeg.hasNext()) {
+            m=leftLeg.next();
+            m.setX(clown.getX() + 30);
+        }
+         while (RighttLeg.hasNext()) {
+            m=RighttLeg.next();
+            m.setX(clown.getX() + 150);
+        }
         return !timeout;
 
     }
@@ -228,15 +235,13 @@ public class Circus implements World {
     @Override
     public int getSpeed() {
         System.out.println(mode.getGamespeed());
-    
-        
-      
+
         return mode.getGamespeed();
     }
 
     @Override
     public int getControlSpeed() {
-       // System.out.println(mode.getControlSpeed());
+        // System.out.println(mode.getControlSpeed());
         return mode.getControlSpeed();
     }
 }

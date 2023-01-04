@@ -31,6 +31,7 @@ public class Repo implements Container {
             if (position < stack.size()) {
                 return true;
             }
+            position=0;
             return false;
         }
 

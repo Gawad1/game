@@ -16,15 +16,11 @@ import model.ImageObject;
  */
 public class Easy implements Mode {
 
-    int width;
-    int height;
     private final Iterator moving = new Repo().getIterator();
     private final Iterator control = new Repo().getIterator();
     private final Iterator constant = new Repo().getIterator();
 
-    public Easy(int width, int height) {
-        this.width = width;
-        this.height = height;
+    public Easy() {
     }
 
     @Override
@@ -42,30 +38,29 @@ public class Easy implements Mode {
     @Override
     public Iterator getMoving() {
         for (int i = 0; i < 10; i++) {
-            int x = (int) (1 + Math.random() * 4);
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
+            moving.Add(getInstanceof("plate"));
         }
         for (int i = 0; i < 10; i++) {
-            int x = (int) (1 + Math.random() * 4);
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
+            moving.Add(getInstanceof("bomb"));
         }
         for (int i = 0; i < 5; i++) {
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
+            moving.Add(getInstanceof("bomb"));
         }
-        moving.Add(getInstanceof(6));
-        moving.Add(getInstanceof(7));
+        moving.Add(getInstanceof("addTime"));
+        moving.Add(getInstanceof("scoreMultiplier"));
         return moving;
     }
 
     @Override
     public Iterator getControl() {
-        control.Add(getInstanceof(0));
+        control.Add(getInstanceof("clown"));
         return control;
     }
 
     @Override
     public Iterator getConstant() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+       constant.Add(new ImageObject(0, 0, "/theme.png", 10));
+        return constant;
     }
 
 }

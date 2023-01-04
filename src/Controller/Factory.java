@@ -18,51 +18,32 @@ import model.ScoreMultiplier;
  */
 public class Factory {
 
-    static public ImageObject getInstanceof(int x, int y, String path, int type) {
-        switch (type) {
-            case 0:
-                return Clown.getinstace();
-            case 1:
-                if ("bowl1.png".equals(path)) {
-                    return new Bowl(x, y, path, type);
+    static public ImageObject getInstanceof(String name) {
+        int x = (int) (1 + Math.random() * 4);
+        if (null != name) {
+            switch (name) {
+                case "clown" -> {
+                    return Clown.getinstace();
                 }
-                return new Plates(x, y, path, type);
-            case 2:
-                if ("bowl2.png".equals(path)) {
-                    return new Bowl(x, y, path, type);
+                case "plate" -> {
+                    return new Bowl((int) (Math.random() * 900), -(int) (Math.random() * 675), "/Plate" + x + ".png", x);
                 }
-                return new Plates(x, y, path, type);
-            case 3:
-                if ("bowl3.png".equals(path)) {
-                    return new Bowl(x, y, path, type);
+                case "bowl" -> {
+                    return new Plates((int) (Math.random() * 900), -(int) (Math.random() * 675), "/Bowl" + x + ".png", x);
                 }
-                return new Plates(x, y, path, type);
-            case 4:
-                if ("bowl4.png".equals(path)) {
-                    return new Bowl(x, y, path, type);
+                case "bomb" -> {
+                    return new Bomb((int) (Math.random() * 900), -(int) (Math.random() * 675), "/bomb.png", 5);
                 }
-                return new Plates(x, y, path, type);
-            case 5:
-                return new Bomb(x, y, path, type);
-            case 6:
-                return ScoreMultiplier.getInstance();
-            case 7:
-                return AddTime.getInstance();
-            default:
-                return null;
+                case "addTime" -> {
+                    return AddTime.getInstance();
+                }
+                case "scoreMultiplier" -> {
+                    return ScoreMultiplier.getInstance();
+                }
+                default -> {
+                }
+            }
         }
-    }
-
-    static public ImageObject getInstanceof(int type) {
-        switch (type) {
-            case 0:
-                return Clown.getinstace();
-            case 6:
-                return ScoreMultiplier.getInstance();
-            case 7:
-                return AddTime.getInstance();
-            default:
-                return null;
-        }
+        return null;
     }
 }
