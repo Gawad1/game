@@ -2,7 +2,7 @@
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
-package circus;
+package View;
 
 import Controller.GameController;
 import Controller.States;
@@ -21,14 +21,9 @@ public class Main {
 
     public static void main(String[] args) {
 
-        Circus circus=new circus.Circus(900, 675,"normal");        
+        Circus circus=new View.Circus(900, 675,"easy");        
         GameController gameController = new GameController(() -> circus);
-        gameController.start();
-        
-
-       
-
-        
+        gameController.start();      
 
     }
 }
