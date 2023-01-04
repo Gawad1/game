@@ -24,12 +24,12 @@ public class Factory {
             switch (name) {
                 case "clown" -> {
                     return Clown.getinstace();
-                }
+                }              
                 case "plate" -> {
-                    return new Bowl((int) (Math.random() * 900), -(int) (Math.random() * 675), "/Plate" + x + ".png", x);
-                }
+                    return new Plates((int) (Math.random() * 900), -(int) (Math.random() * 675), "/Plate" + x + ".png", x);
+                }               
                 case "bowl" -> {
-                    return new Plates((int) (Math.random() * 900), -(int) (Math.random() * 675), "/Bowl" + x + ".png", x);
+                    return new Bowl((int) (Math.random() * 900), -(int) (Math.random() * 675), "/Bowl" + x + ".png", x);
                 }
                 case "bomb" -> {
                     return new Bomb((int) (Math.random() * 900), -(int) (Math.random() * 675), "/bomb.png", 5);

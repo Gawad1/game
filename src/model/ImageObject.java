@@ -32,6 +32,7 @@ public class ImageObject implements GameObject {
         this.visible = true;
         // create a bunch of buffered images and place into an array, to be displayed sequentially
         try {
+
             spriteImages[0] = ImageIO.read(getClass().getResourceAsStream(path));
         } catch (IOException e) {
             e.printStackTrace();

@@ -17,6 +17,7 @@ import java.util.logging.Logger;
 import static Controller.Factory.getInstanceof;
 import Controller.Iterator.Iterator;
 import Controller.Iterator.Repo;
+import Controller.MainController;
 import Controller.Strategy.Mode;
 import Controller.Strategy.GameMode;
 import model.AddTime;
@@ -32,172 +33,29 @@ public class Circus implements World {
     private long startTime = System.currentTimeMillis();
     private final int width;
     private final int height;
-    int totalleft = 0;
-    int totalright = 0;
     private Iterator moving;
     private Iterator control;
-    private Iterator leftLeg = new Repo().getIterator();
-    private Iterator RighttLeg = new Repo().getIterator();
     private Iterator constant;
     States states = new States();
-    Mode mode;
-    int speed;
+    MainController mainController;
 
     public Circus(int screenWidth, int screenHeight, String GameMode) {
-
         width = screenWidth;
         height = screenHeight;
-
-        //Clown.getinstace().setX(screenWidth / 3);
-        //Clown.getinstace().setY((screenHeight * 0.65));
-        //Clown.getinstace().setType(0);
-        //Clown clown =new  Clown(screenWidth / 3, (int) (screenHeight * 0.65), "/clown.png", 0);
-        //control.Add(Clown.getinstace());
-        //constant.Add(new ImageObject(0, 0, "/theme.png", 10));
-        GameMode gameMode = new GameMode(screenWidth, screenHeight, GameMode);
-        mode = gameMode.getMode();
-        speed = mode.getGamespeed();
-        System.out.println("dd");
-        System.out.println(gameMode.getMode().getGamespeed());
-
-        System.out.println(gameMode.getMode().getGamespeed());
-        moving = mode.getMoving();
-        control = mode.getControl();
-        constant = mode.getConstant();
-        /*for (int i = 0; i < 10; i++) {
-            int x = (int) (1 + Math.random() * 4);
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Plate" + x + ".png", x));
-        }
-        for (int i = 0; i < 10; i++) {
-            int x = (int) (1 + Math.random() * 4);
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/Bowl" + x + ".png", x));
-        }
-        for (int i = 0; i < 10; i++) {
-            moving.Add(getInstanceof((int) (Math.random() * width), -(int) (Math.random() * height), "/bomb.png", 5));
-        }
-        moving.Add(ScoreMultiplier.getInstance());
-        moving.Add(AddTime.getInstance());
-         */
-    }
-
-    private boolean intersectLeft(GameObject clown, GameObject object) {
-        return (Math.abs((clown.getX() + 30) - (object.getX() + object.getWidth() / 10)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY()) - totalleft) == 0);
-    }
-
-    private boolean intersectRight(GameObject clown, GameObject object) {
-        return (Math.abs((clown.getX() + 150) - (object.getX() + object.getWidth() / 10)) <= object.getWidth()) && (Math.abs((clown.getY()) - (object.getY()) - totalright) == 0);
+        mainController = new MainController(screenWidth, screenHeight, GameMode, startTime);
+        moving = mainController.getMoving();
+        control = mainController.getControl();
+        constant = mainController.getConstant();
     }
 
     @Override
     public boolean refresh() {
         boolean timeout = System.currentTimeMillis() - startTime > MAX_TIME;
-        ImageObject clown = control.get(0);
-        ImageObject m;
-        while (moving.hasNext()) {
-            m = moving.next();
-            switch (m.getType()) {
-                case 1,2,3,4 -> {
-                    if (intersectLeft(clown, m)) {
-                        totalleft = totalleft + m.getHeight();
-                        control.Add(m);
-                        moving.Remove(m);
-                        leftLeg.Add(m);
-                        m.setX(clown.getX() + 30);
-                        m.setY(clown.getY() + 15 - totalleft);
-                        m.setKey(1);
-                        int x = leftLeg.List().size();
-                        if (x >= 3 && leftLeg.get(x - 1).getType() == leftLeg.get(x - 2).getType() && leftLeg.get(x - 1).getType() == leftLeg.get(x - 3).getType()) {
-                            for (int i = 1; i <= 3; i++) {
-                                leftLeg.get(x - i).setY(-(int) (Math.random() * getHeight()));
-                                leftLeg.get(x - i).setX((int) (Math.random() * getWidth()));
-                                leftLeg.get(x - i).setKey(0);
-                                moving.Add(leftLeg.get(x - i));
-                                control.Remove(leftLeg.get(x - i));
-                                totalleft = totalleft - leftLeg.get(x - i).getHeight();
-                                leftLeg.Remove(leftLeg.get(x - i));
-                            }
-                            score = score + 10;
-                        }
-                    }
-
-                    if (intersectRight(clown, m)) {
-                        totalright = totalright + m.getHeight();
-                        control.Add(m);
-                        moving.Remove(m);
-                        RighttLeg.Add(m);
-                        m.setX(clown.getX() + 150);
-                        m.setY(clown.getY() + 15 - totalright);
-                        m.setKey(1);
-                        int x = RighttLeg.List().size();
-                        if (x >= 3 && RighttLeg.get(x - 1).getType() == RighttLeg.get(x - 2).getType() && RighttLeg.get(x - 1).getType() == RighttLeg.get(x - 3).getType()) {
-                            for (int i = 1; i <= 3; i++) {
-                                RighttLeg.get(x - i).setY(-(int) (Math.random() * getHeight()));
-                                RighttLeg.get(x - i).setX((int) (Math.random() * getWidth()));
-                                RighttLeg.get(x - i).setKey(0);
-                                moving.Add(RighttLeg.get(x - i));
-                                control.Remove(RighttLeg.get(x - i));
-                                totalright = totalright - RighttLeg.get(x - i).getHeight();
-                                RighttLeg.Remove(RighttLeg.get(x - i));
-                            }
-                            score = score + 10;
-                        }
-                    }
-                    m.setY((m.getY() + 1));
-                    if (m.getY() == height) {
-                        m.setY(-(int) (Math.random() * getHeight()));
-                        m.setX((int) (Math.random() * getWidth()));
-                    }
-                }
-
-                case 5 -> {
-                    if (intersectLeft(clown, m) || intersectRight(clown, m)) {
-                        m.setY(-(int) (Math.random() * getHeight()));
-                        m.setX((int) (Math.random() * getWidth()));
-                        score = Math.max(0, score - 10);
-                    }
-                    m.setY((m.getY() + 1));
-                    if (m.getY() == height) {
-                        m.setY(-(int) (Math.random() * getHeight()));
-                        m.setX((int) (Math.random() * getWidth()));
-
-                    }
-                }
-                case 6 -> {
-                    if (intersectLeft(clown, m) || intersectRight(clown, m)) {
-                        m.setY(-500);
-                        m.setX((int) (Math.random() * getWidth()));
-                        score = score * 2;
-                    }
-                    m.setY((m.getY() + 1));
-                    if (m.getY() == height) {
-                        m.setY(-500);
-                        m.setX((int) (Math.random() * getWidth()));
-
-                    }
-                }
-                case 7 -> {
-                    if (intersectLeft(clown, m) || intersectRight(clown, m)) {
-                        m.setY(-500);
-                        m.setX((int) (Math.random() * getWidth()));
-                        startTime = startTime + 10 * 1000;
-                    }
-                    m.setY((m.getY() + 1));
-                    if (m.getY() == height) {
-                        m.setY(-500);
-                        m.setX((int) (Math.random() * getWidth()));
-
-                    }
-                }
-            }
-        }
-        while (leftLeg.hasNext()) {
-            m=leftLeg.next();
-            m.setX(clown.getX() + 30);
-        }
-         while (RighttLeg.hasNext()) {
-            m=RighttLeg.next();
-            m.setX(clown.getX() + 150);
-        }
+        mainController.doRefresh();
+        moving = mainController.getMoving();
+        control = mainController.getControl();
+        score = mainController.getScore();
+        startTime = mainController.getStartTime();
         return !timeout;
 
     }
@@ -234,14 +92,11 @@ public class Circus implements World {
 
     @Override
     public int getSpeed() {
-        System.out.println(mode.getGamespeed());
-
-        return mode.getGamespeed();
+        return mainController.getSpeed();
     }
 
     @Override
     public int getControlSpeed() {
-        // System.out.println(mode.getControlSpeed());
-        return mode.getControlSpeed();
+        return mainController.getControlSpeed();
     }
 }

@@ -41,7 +41,7 @@ public class Easy implements Mode {
             moving.Add(getInstanceof("plate"));
         }
         for (int i = 0; i < 10; i++) {
-            moving.Add(getInstanceof("bomb"));
+            moving.Add(getInstanceof("bowl"));
         }
         for (int i = 0; i < 5; i++) {
             moving.Add(getInstanceof("bomb"));
