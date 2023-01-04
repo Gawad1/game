@@ -4,6 +4,8 @@
  */
 package Controller;
 
+import View.ChooseMode;
+import View.CircusGame;
 import eg.edu.alexu.csd.oop.game.GameEngine;
 import eg.edu.alexu.csd.oop.game.World;
 import java.awt.Color;
@@ -41,13 +43,16 @@ public final class GameController {
         menu.add(pauseMenuItem);
         menu.add(resumeMenuItem);
         menuBar.add(menu);
+        ChooseMode chooseMode=new ChooseMode();
         
         newMenuItem.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+                chooseMode.setVisible(true);
+                gameFrame.dispose();
 //                gameController.changeWorld(new StarWar(800, 600));
-                  gameFrame.dispose();
-                  start();
+                 // gameFrame.dispose();
+                  //start();
                  
             }
         });
