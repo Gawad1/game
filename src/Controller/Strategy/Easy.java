@@ -45,7 +45,7 @@ public class Easy implements Mode {
         }
         for (int i = 0; i < 5; i++) {
             moving.Add(getInstanceof("bomb"));
-        }
+        }       
         moving.Add(getInstanceof("addTime"));
         moving.Add(getInstanceof("scoreMultiplier"));
         return moving;

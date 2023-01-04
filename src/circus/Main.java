@@ -16,9 +16,10 @@ import java.awt.Color;
 public class Main {
 
     public static void main(String[] args) {
-       // final GameController gameController = GameEngine.start("Circus Game", new circus.Circus(900, 675, "hard"), Color.YELLOW);
+       
+// final GameController gameController = GameEngine.start("Circus Game", new circus.Circus(900, 675, "hard"), Color.YELLOW);
         
-        GameController gameController = new GameController(() -> new circus.Circus(900, 675,"hard"));
+        GameController gameController = new GameController(() -> new circus.Circus(900, 675,"easy"));
         gameController.start();
 
     }
