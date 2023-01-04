@@ -8,7 +8,7 @@ import Controller.Iterator.Iterator;
 import Controller.Iterator.Repo;
 import Controller.Strategy.GameMode;
 import Controller.Strategy.Mode;
-import circus.Circus;
+import View.Circus;
 import eg.edu.alexu.csd.oop.game.GameObject;
 import java.io.IOException;
 import java.util.logging.Level;

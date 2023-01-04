@@ -20,9 +20,11 @@ public class ChooseMode extends javax.swing.JFrame implements Subject {
      */
     boolean state = true;
     ArrayList<Observer> observersList = new ArrayList();
+
     public ChooseMode() {
         initComponents();
     }
+
     @Override
     public void setVisualState(boolean state) {
         this.state = state;
@@ -117,21 +119,24 @@ public class ChooseMode extends javax.swing.JFrame implements Subject {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Circus circus=new View.Circus(900, 675,"easy");        
+        this.setVisible(false);
+        Circus circus = new View.Circus(900, 675, "easy");
         GameController gameController = new GameController(() -> circus);
-        gameController.start();      
+        gameController.start();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      Circus circus=new View.Circus(900, 675,"normal");        
+        this.setVisible(false);
+        Circus circus = new View.Circus(900, 675, "normal");
         GameController gameController = new GameController(() -> circus);
-        gameController.start();      
+        gameController.start();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-        Circus circus=new View.Circus(900, 675,"hard");        
+        this.setVisible(false);
+        Circus circus = new View.Circus(900, 675, "hard");
         GameController gameController = new GameController(() -> circus);
-        gameController.start();      
+        gameController.start();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
@@ -173,7 +178,6 @@ public class ChooseMode extends javax.swing.JFrame implements Subject {
         });
     }
 
-  
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
